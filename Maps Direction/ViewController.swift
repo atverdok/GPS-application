@@ -70,18 +70,13 @@ class ViewController: UIViewController , GMSMapViewDelegate ,  CLLocationManager
 	func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
 		
 		let location = locations.last
-		
-//		let camera = GMSCameraPosition.camera(withLatitude: (location?.coordinate.latitude)!, longitude: (location?.coordinate.longitude)!, zoom: 17.0)
-		
 		let locationTujuan = CLLocation(latitude: 50.466543, longitude: 30.503853)
 		
 		createMarker(titleMarker: "Lokasi Tujuan", iconMarker: #imageLiteral(resourceName: "mapspin") , latitude: locationTujuan.coordinate.latitude, longitude: locationTujuan.coordinate.longitude)
-		
 		createMarker(titleMarker: "Lokasi Aku", iconMarker: #imageLiteral(resourceName: "mapspin") , latitude: (location?.coordinate.latitude)!, longitude: (location?.coordinate.longitude)!)
 		
 		drawPath(startLocation: location!, endLocation: locationTujuan)
 		
-//		self.googleMaps?.animate(to: camera)
 		self.locationManager.stopUpdatingLocation()
 		
 	}
@@ -148,7 +143,6 @@ class ViewController: UIViewController , GMSMapViewDelegate ,  CLLocationManager
 				polyline.strokeColor = UIColor.red
 				polyline.map = self.googleMaps
 			}
-			
 		}
 	}
 	
@@ -208,13 +202,13 @@ extension ViewController: GMSAutocompleteViewControllerDelegate {
 		
 		// set coordinate to text
 		if locationSelected == .startLocation {
-			startLocation.text = "\(place.coordinate.latitude), \(place.coordinate.longitude)"
+			startLocation.text = place.formattedAddress
 			locationStart = CLLocation(latitude: place.coordinate.latitude, longitude: place.coordinate.longitude)
-			createMarker(titleMarker: "Location Start", iconMarker: #imageLiteral(resourceName: "mapspin"), latitude: place.coordinate.latitude, longitude: place.coordinate.longitude)
+			createMarker(titleMarker: "Location Start", iconMarker: #imageLiteral(resourceName: "icons8-marker-40"), latitude: place.coordinate.latitude, longitude: place.coordinate.longitude)
 		} else {
-			destinationLocation.text = "\(place.coordinate.latitude), \(place.coordinate.longitude)"
+			destinationLocation.text = place.formattedAddress
 			locationEnd = CLLocation(latitude: place.coordinate.latitude, longitude: place.coordinate.longitude)
-			createMarker(titleMarker: "Location End", iconMarker: #imageLiteral(resourceName: "mapspin"), latitude: place.coordinate.latitude, longitude: place.coordinate.longitude)
+			createMarker(titleMarker: "Location End", iconMarker: #imageLiteral(resourceName: "icons7"), latitude: place.coordinate.latitude, longitude: place.coordinate.longitude)
 		}
 		
 		
