@@ -30,7 +30,19 @@ class ViewController: UIViewController , GMSMapViewDelegate ,  CLLocationManager
 	var locationStart = CLLocation()
 	var locationEnd = CLLocation()
 	
-	override func viewDidLoad() {
+    @IBOutlet weak var segContr: UISegmentedControl!
+    
+    @IBAction func segControll(_ sender: Any) {
+        switch (segContr.selectedSegmentIndex) {
+        case 0:
+            googleMaps.mapType = kGMSTypeNormal
+        case 1:
+            googleMaps.mapType = kGMSTypeSatellite
+        default:
+            googleMaps.mapType = kGMSTypeHybrid
+        }
+    }
+    override func viewDidLoad() {
 		super.viewDidLoad()
 		
 		locationManager = CLLocationManager()
